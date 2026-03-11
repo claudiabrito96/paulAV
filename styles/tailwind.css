@@ -1,0 +1,43 @@
+/* styles/tailwind.css */
+
+/* Import Tailwind base styles */
+@tailwind base;
+
+/* Import Tailwind component classes (like buttons, forms, etc.) */
+@tailwind components;
+
+/* Import Tailwind utility classes (spacing, text, colors, etc.) */
+@tailwind utilities;
+
+/* Custom global styles (optional) */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #ffffff;
+  color: #111827; /* dark gray text for readability */
+  scroll-behavior: smooth;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Customize buttons (optional) */
+button {
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+/* Section spacing (optional) */
+section {
+  scroll-margin-top: 80px; /* useful for navbar offset */
+}
