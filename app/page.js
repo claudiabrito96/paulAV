@@ -1,193 +1,341 @@
+"use client";
+
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 
-export default function Home() {
+// ─── Scroll Reveal Hook ───────────────────────────────────────
+function useReveal() {
+  const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect(); } },
+      { threshold: 0.12 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  return [ref, visible];
+}
+
+// ─── Reusable Reveal Wrapper ──────────────────────────────────
+function Reveal({ children, delay = 0, className = "" }) {
+  const [ref, visible] = useReveal();
   return (
-    <main className="min-h-screen">
+    <div
+      ref={ref}
+      className={className}
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(28px)",
+        transition: `opacity 0.7s ease ${delay}s, transform 0.7s ease ${delay}s`,
+      }}
+    >
+      {children}
+    </div>
+  );
+}
 
-      {/* NAVBAR */}
+// ─── Data ─────────────────────────────────────────────────────
+const SERVICES = [
+  { icon: "🎤", title: "Corporate & Conference AV", desc: "Video walls, hybrid meeting rooms, control systems, and seamless integration for any corporate environment." },
+  { icon: "🎥", title: "Live Event Production", desc: "Concerts, galas, trade shows — full lighting, sound and video production managed end-to-end." },
+  { icon: "🏠", title: "Home Theater & Smart Homes", desc: "Premium residential installations, multi-room audio systems, and cinema-grade home theaters." },
+  { icon: "🖥️", title: "Video Conferencing", desc: "Zoom/Teams rooms, PTZ cameras, microphones, and full collaboration tool integration." },
+  { icon: "📺", title: "Digital Signage", desc: "Content management systems, LED walls, and dynamic messaging solutions for any environment." },
+  { icon: "🔧", title: "Service & Maintenance", desc: "24/7 support, preventive maintenance programs, emergency repairs, and system upgrades." },
+];
 
-      <nav className="flex items-center justify-between p-6 border-b">
-        <div className="flex items-center gap-3">
+const PORTFOLIO = [
+  { src: "https://www.cti.com/wp-content/uploads/2025/02/Meeting-Room-Video-Wall-CTI-logo.png", label: "Corporate AV", span: "large" },
+  { src: "https://amhelectronics.com/wp-content/uploads/2025/04/Services-Commercial-Home-Page-new.jpg", label: "Conference Room", span: "small" },
+  { src: "https://www.ldsystems.com/wp-content/uploads/2013/10/PROJECTS-NYE-Live-Houston-01.jpg", label: "Live Production", span: "small" },
+  { src: "https://ava-public.s3.eu-central-1.amazonaws.com/wp-content/uploads/2022/01/06153646/konsertystemer-nordic-beats-2017-2.jpg", label: "Event Lighting", span: "small" },
+  { src: "https://beaconaudiovideosystems.com/images/easyblog_articles/243/b2ap3_amp_BEAUVI_MayBlog1_Home-Theater-Setup-Cincinnati-OH_PHOTO.jpg", label: "Home Theater", span: "small" },
+  { src: "https://www.aurumhometech.com/images/easyblog_articles/139/b2ap3_large_immerse-yourself-in-another-world-with-a-custom-home-theater-design.jpg", label: "Premium Cinema", span: "small" },
+];
 
-          <Image
-            src="/logo.png"
-            width={50}
-            height={50}
-            alt="Paul AV Logo"
-          />
+// ─── Components ───────────────────────────────────────────────
 
-          <span className="font-bold text-xl">
-            Paul AV Solutions
-          </span>
+function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
-        </div>
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 60);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
-        <div className="hidden md:flex gap-6 text-lg">
-          <a href="#services">Services</a>
-          <a href="#portfolio">Portfolio</a>
-          <a href="#contact">Contact</a>
-        </div>
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+  }, [menuOpen]);
+
+  const closeMenu = () => setMenuOpen(false);
+
+  return (
+    <>
+      <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
+        <a href="#home" className="nav-logo">
+          <Image src="/logo.png" alt="Paul Stuart AV" width={40} height={40} className="nav-logo-img" onError={(e) => { e.target.style.display = "none"; }} />
+          <span className="nav-logo-text">Paul Stuart <em>AV</em></span>
+        </a>
+        <ul className="nav-links">
+          {["services", "locations", "portfolio", "contact"].map((s) => (
+            <li key={s}><a href={`#${s}`}>{s.charAt(0).toUpperCase() + s.slice(1)}</a></li>
+          ))}
+        </ul>
+        <a href="#contact" className="nav-cta">Get a Quote</a>
+        <button className={`hamburger ${menuOpen ? "open" : ""}`} onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
+          <span /><span /><span />
+        </button>
       </nav>
 
+      {/* Mobile Menu */}
+      <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
+        {["services", "locations", "portfolio", "contact"].map((s) => (
+          <a key={s} href={`#${s}`} onClick={closeMenu}>{s.charAt(0).toUpperCase() + s.slice(1)}</a>
+        ))}
+        <a href="#contact" className="mobile-cta" onClick={closeMenu}>Get a Quote</a>
+      </div>
+    </>
+  );
+}
 
-      {/* HERO */}
-
-      <section className="text-center py-24 px-6">
-
-        <h1 className="text-5xl md:text-6xl font-bold">
-          Professional Audio Visual Solutions
-        </h1>
-
-        <p className="mt-6 text-lg max-w-xl mx-auto">
-          We design and install professional AV systems for homes,
-          businesses, and live events.
-        </p>
-
-        <a
-          href="#contact"
-          className="inline-block mt-8 bg-black text-white px-8 py-4 rounded-lg"
-        >
-          Request a Quote
-        </a>
-
-      </section>
-
-
-      {/* SERVICES */}
-
-      <section
-        id="services"
-        className="py-20 px-6 bg-gray-50"
-      >
-
-        <h2 className="text-4xl font-bold text-center">
-          Our Services
-        </h2>
-
-        <div className="grid md:grid-cols-3 gap-10 mt-12 max-w-6xl mx-auto">
-
-          <div className="p-6 border rounded-lg">
-            <h3 className="font-semibold text-xl">
-              Home Theater Installation
-            </h3>
-            <p className="mt-2">
-              Custom home theater systems with premium sound
-              and immersive viewing experiences.
-            </p>
+function Hero() {
+  return (
+    <header className="hero" id="home">
+      <div className="hero-bg" />
+      <div className="hero-line" />
+      <p className="hero-eyebrow">
+        <span className="eyebrow-line" />
+        Boutique AV Concierge · Since 2010
+        <span className="eyebrow-line" />
+      </p>
+      <h1 className="hero-title">
+        Tampa &amp; Chicago&apos;s<br />
+        <em>Premier AV Partner</em>
+      </h1>
+      <p className="hero-sub">
+        White-glove audio visual services for corporate conferences, board meetings, live events, and premium residences.
+      </p>
+      <div className="hero-actions">
+        <a href="#contact" className="btn-primary">Request Free Quote</a>
+        <a href="#portfolio" className="btn-secondary">See Our Work</a>
+      </div>
+      <div className="hero-badges">
+        {[["15+", "Years Experience"], ["500+", "Events Produced"], ["2", "Market Locations"], ["24/7", "Support Available"]].map(([n, l]) => (
+          <div className="hero-badge" key={l}>
+            <strong>{n}</strong>
+            <span>{l}</span>
           </div>
+        ))}
+      </div>
+      <div className="scroll-hint">
+        <span>Scroll</span>
+        <div className="scroll-line" />
+      </div>
+    </header>
+  );
+}
 
-          <div className="p-6 border rounded-lg">
-            <h3 className="font-semibold text-xl">
-              Corporate AV Systems
-            </h3>
-            <p className="mt-2">
-              Conference rooms, meeting spaces, and corporate
-              presentation systems.
+function Services() {
+  return (
+    <section id="services" className="section section-surface">
+      <div className="section-inner">
+        <div className="services-header">
+          <Reveal>
+            <p className="section-label">What We Do</p>
+            <h2 className="section-title">End-to-End Boutique<br />AV Solutions</h2>
+          </Reveal>
+          <Reveal delay={0.1} className="section-body-wrap">
+            <p className="section-body">
+              From intimate board meetings to large-scale live productions, we deliver seamless, flawless AV experiences — every time.
             </p>
-          </div>
-
-          <div className="p-6 border rounded-lg">
-            <h3 className="font-semibold text-xl">
-              Event Production
-            </h3>
-            <p className="mt-2">
-              Professional audio, lighting, and video systems
-              for events and productions.
-            </p>
-          </div>
-
+          </Reveal>
         </div>
-
-      </section>
-
-
-      {/* PORTFOLIO */}
-
-      <section
-        id="portfolio"
-        className="py-20 px-6"
-      >
-
-        <h2 className="text-4xl font-bold text-center">
-          Our Work
-        </h2>
-
-        <div className="grid md:grid-cols-3 gap-6 mt-12 max-w-6xl mx-auto">
-
-          <Image
-            src="/project1.jpg"
-            width={400}
-            height={300}
-            alt="AV installation project"
-            className="rounded-lg"
-          />
-
-          <Image
-            src="/project2.jpg"
-            width={400}
-            height={300}
-            alt="Conference room AV setup"
-            className="rounded-lg"
-          />
-
-          <Image
-            src="/project3.jpg"
-            width={400}
-            height={300}
-            alt="Event AV system"
-            className="rounded-lg"
-          />
-
+        <div className="services-grid">
+          {SERVICES.map((svc, i) => (
+            <Reveal key={svc.title} delay={i * 0.07} className="service-card">
+              <div className="service-icon">{svc.icon}</div>
+              <h3>{svc.title}</h3>
+              <p>{svc.desc}</p>
+              <span className="service-arrow">Learn more →</span>
+            </Reveal>
+          ))}
         </div>
+      </div>
+    </section>
+  );
+}
 
-      </section>
+function Locations() {
+  return (
+    <section id="locations" className="section">
+      <div className="section-inner">
+        <Reveal>
+          <p className="section-label">Where We Operate</p>
+          <h2 className="section-title">Two Markets,<br />One Standard of Excellence</h2>
+        </Reveal>
+        <div className="locations-grid">
+          {[
+            { city: "Tampa", sub: "Main Office & Warehouse", detail: "Tampa Bay Area, FL\nServing all of the Gulf Coast" },
+            { city: "Chicago", sub: "Midwest Office", detail: "Greater Chicago Area, IL\nServing the entire Midwest" },
+          ].map((loc, i) => (
+            <Reveal key={loc.city} delay={i * 0.15} className="location-card">
+              <p className="location-pin">📍 {loc.city}</p>
+              <h3>{loc.city}</h3>
+              <p className="loc-sub">{loc.sub}</p>
+              <address>
+                {loc.detail.split("\n").map((line, j) => <span key={j}>{line}<br /></span>)}
+                <br />
+                <a href="tel:+12245953327">+1 224 595 3327</a>
+              </address>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
 
+function Portfolio() {
+  return (
+    <section id="portfolio" className="section section-bg">
+      <div className="section-inner">
+        <Reveal className="portfolio-header">
+          <p className="section-label center">Our Work</p>
+          <h2 className="section-title center">Featured Projects</h2>
+          <p className="section-body center">A selection of recent corporate, live event, and residential installations.</p>
+        </Reveal>
+        <div className="portfolio-grid">
+          {PORTFOLIO.map((item, i) => (
+            <Reveal key={i} delay={i * 0.08} className={`portfolio-item portfolio-item-${i}`}>
+              <img src={item.src} alt={item.label} loading="lazy" className="portfolio-img" />
+              <div className="portfolio-overlay">
+                <span>{item.label}</span>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
 
-      {/* CONTACT */}
+function Contact() {
+  const [submitted, setSubmitted] = useState(false);
+  const [form, setForm] = useState({ name: "", email: "", service: "", message: "" });
 
-      <section
-        id="contact"
-        className="py-20 px-6 bg-gray-50"
-      >
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
 
-        <h2 className="text-4xl font-bold text-center">
-          Contact Us
-        </h2>
+  return (
+    <section id="contact" className="section section-surface">
+      <div className="section-inner">
+        <div className="contact-wrap">
+          <Reveal className="contact-info">
+            <p className="section-label">Get In Touch</p>
+            <h2 className="contact-title">Ready to Elevate<br />Your <em>AV Experience?</em></h2>
+            <p className="contact-desc">
+              Whether you're planning a corporate event, upgrading your conference rooms, or dreaming of the perfect home theater — we'd love to hear from you.
+            </p>
+            <div className="contact-details">
+              {[
+                { icon: "📞", text: "+1 224 595 3327", href: "tel:+12245953327" },
+                { icon: "✉️", text: "paulstuartAV@gmail.com", href: "mailto:paulstuartAV@gmail.com" },
+                { icon: "📍", text: "Tampa, FL & Chicago, IL", href: null },
+              ].map((d) => (
+                <div className="contact-detail" key={d.text}>
+                  <span className="detail-icon">{d.icon}</span>
+                  {d.href ? <a href={d.href}>{d.text}</a> : <span>{d.text}</span>}
+                </div>
+              ))}
+            </div>
+          </Reveal>
 
-        <form className="max-w-xl mx-auto mt-10 flex flex-col gap-4">
+          <Reveal delay={0.15}>
+            {!submitted ? (
+              <form className="contact-form" onSubmit={handleSubmit}>
+                <div className="form-row">
+                  <div className="field">
+                    <label htmlFor="name">Full Name</label>
+                    <input type="text" id="name" name="name" placeholder="John Smith" value={form.name} onChange={handleChange} required />
+                  </div>
+                  <div className="field">
+                    <label htmlFor="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="john@company.com" value={form.email} onChange={handleChange} required />
+                  </div>
+                </div>
+                <div className="field">
+                  <label htmlFor="service">Service Needed</label>
+                  <select id="service" name="service" value={form.service} onChange={handleChange}>
+                    <option value="" disabled>Select a service…</option>
+                    {SERVICES.map((s) => <option key={s.title}>{s.title}</option>)}
+                    <option>Other</option>
+                  </select>
+                </div>
+                <div className="field">
+                  <label htmlFor="message">Tell Us About Your Project</label>
+                  <textarea id="message" name="message" rows={5} placeholder="Describe your event, timeline, and any specific requirements…" value={form.message} onChange={handleChange} required />
+                </div>
+                <button type="submit" className="submit-btn">Send Message</button>
+              </form>
+            ) : (
+              <div className="form-success">
+                ✦ Thank you! We&apos;ll be in touch within one business day.
+              </div>
+            )}
+          </Reveal>
+        </div>
+      </div>
+    </section>
+  );
+}
 
-          <input
-            placeholder="Name"
-            className="border p-3 rounded"
-          />
+function Footer() {
+  return (
+    <footer>
+      <div className="footer-inner">
+        <div className="footer-top">
+          <div className="footer-logo">Paul Stuart <span>AV</span></div>
+          <nav className="footer-nav">
+            {["services", "locations", "portfolio", "contact"].map((s) => (
+              <a key={s} href={`#${s}`}>{s.charAt(0).toUpperCase() + s.slice(1)}</a>
+            ))}
+          </nav>
+        </div>
+        <div className="footer-bottom">
+          <p className="footer-copy">© 2026 Paul Stuart AV. All rights reserved. Tampa • Chicago</p>
+          <div className="footer-contact">
+            <a href="tel:+12245953327">+1 224 595 3327</a>
+            <a href="mailto:paulstuartAV@gmail.com">paulstuartAV@gmail.com</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
 
-          <input
-            placeholder="Email"
-            className="border p-3 rounded"
-          />
-
-          <textarea
-            placeholder="Tell us about your project"
-            className="border p-3 rounded"
-          />
-
-          <button
-            className="bg-black text-white p-4 rounded"
-          >
-            Send Message
-          </button>
-
-        </form>
-
-      </section>
-
-
-      {/* FOOTER */}
-
-      <footer className="text-center p-6 border-t">
-        © {new Date().getFullYear()} Paul AV Solutions
-      </footer>
-
-    </main>
+// ─── Page ──────────────────────────────────────────────────────
+export default function Home() {
+  return (
+    <>
+      <Navbar />
+      <Hero />
+      <Services />
+      <hr className="divider" />
+      <Locations />
+      <hr className="divider" />
+      <Portfolio />
+      <hr className="divider" />
+      <Contact />
+      <Footer />
+    </>
   );
 }
