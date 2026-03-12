@@ -5,15 +5,17 @@
 
 /* ─── Design Tokens ──────────────────────────────────────────── */
 :root {
-  --c-bg:        #0a0a0b;
-  --c-surface:   #111113;
-  --c-card:      #16161a;
-  --c-border:    rgba(255, 255, 255, 0.07);
-  --c-gold:      #c9a96e;
-  --c-gold-dim:  rgba(201, 169, 110, 0.12);
-  --c-text:      #e8e6e1;
-  --c-muted:     #7a7875;
-  --c-white:     #ffffff;
+  --c-bg:        #0b0e0c;
+  --c-surface:   #101510;
+  --c-card:      #141c14;
+  --c-border:    rgba(180, 210, 180, 0.08);
+  --c-gold:      #d4b896;
+  --c-gold-dim:  rgba(212, 184, 150, 0.12);
+  --c-sage:      #8aab8a;
+  --c-sage-dim:  rgba(138, 171, 138, 0.12);
+  --c-text:      #e6ebe6;
+  --c-muted:     #7a8c7a;
+  --c-white:     #f5f8f5;
 
   --font-display: var(--font-display, 'Georgia', serif);
   --font-body:    var(--font-body, system-ui, sans-serif);
@@ -57,7 +59,7 @@ body::before {
 /* Scrollbar */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--c-bg); }
-::-webkit-scrollbar-thumb { background: var(--c-gold); border-radius: 2px; }
+::-webkit-scrollbar-thumb { background: var(--c-sage); border-radius: 2px; }
 
 /* ─── NAVBAR ─────────────────────────────────────────────────── */
 .navbar {
@@ -150,9 +152,9 @@ body::before {
 .hero-bg {
   position: absolute; inset: 0; z-index: 0;
   background:
-    radial-gradient(ellipse 80% 60% at 50% 30%, rgba(201, 169, 110, 0.06) 0%, transparent 70%),
-    radial-gradient(ellipse 60% 80% at 80% 80%, rgba(100, 80, 30, 0.04) 0%, transparent 60%),
-    linear-gradient(180deg, #0a0a0b 0%, #0d0d0f 100%);
+    radial-gradient(ellipse 80% 60% at 50% 30%, rgba(138, 171, 138, 0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 80% at 80% 80%, rgba(212, 184, 150, 0.04) 0%, transparent 60%),
+    linear-gradient(180deg, #0b0e0c 0%, #0e130e 100%);
 }
 .hero-line {
   position: absolute; top: 0; left: 50%; transform: translateX(-50%);
@@ -303,12 +305,12 @@ body::before {
 .service-icon {
   width: 48px; height: 48px; margin-bottom: 1.5rem;
   display: flex; align-items: center; justify-content: center;
-  border: 1px solid var(--c-gold-dim); border-radius: 50%;
+  border: 1px solid var(--c-sage-dim); border-radius: 50%;
   font-size: 1.3rem;
   transition: border-color var(--t), background var(--t);
 }
 .service-card:hover .service-icon {
-  background: var(--c-gold-dim); border-color: var(--c-gold);
+  background: var(--c-sage-dim); border-color: var(--c-sage);
 }
 .service-card h3 {
   font-family: var(--font-display); font-size: 1.2rem; font-weight: 400;
