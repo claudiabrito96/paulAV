@@ -5,20 +5,20 @@
 
 /* ─── Design Tokens ──────────────────────────────────────────── */
 :root {
-  --c-bg:        #0b0e0c;
-  --c-surface:   #101510;
-  --c-card:      #141c14;
-  --c-border:    rgba(180, 210, 180, 0.08);
-  --c-gold:      #d4b896;
-  --c-gold-dim:  rgba(212, 184, 150, 0.12);
-  --c-sage:      #8aab8a;
-  --c-sage-dim:  rgba(138, 171, 138, 0.12);
-  --c-text:      #e6ebe6;
-  --c-muted:     #7a8c7a;
-  --c-white:     #f5f8f5;
+  --c-bg:        #3d6b60;
+  --c-surface:   #365f55;
+  --c-card:      #2f5249;
+  --c-border:    rgba(255, 255, 255, 0.12);
+  --c-gold:      #c8b98a;
+  --c-gold-dim:  rgba(200, 185, 138, 0.18);
+  --c-sage:      #c8b98a;
+  --c-sage-dim:  rgba(200, 185, 138, 0.18);
+  --c-text:      #ffffff;
+  --c-muted:     rgba(255, 255, 255, 0.65);
+  --c-white:     #ffffff;
 
-  --font-display: var(--font-display, 'Georgia', serif);
-  --font-body:    var(--font-body, system-ui, sans-serif);
+  --font-display: var(--font-display, 'Playfair Display', Georgia, serif);
+  --font-body:    var(--font-body, 'Inter', system-ui, sans-serif);
 
   --r:           6px;
   --ease:        cubic-bezier(0.4, 0, 0.2, 1);
@@ -53,7 +53,7 @@ body::before {
   content: '';
   position: fixed; inset: 0; z-index: 0; pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-  opacity: 0.3;
+  opacity: 0.55;
 }
 
 /* Scrollbar */
@@ -66,7 +66,7 @@ body::before {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
   padding: 1.2rem 4vw;
-  background: rgba(10, 10, 11, 0.85);
+  background: rgba(47, 82, 73, 0.90);
   backdrop-filter: blur(18px) saturate(1.4);
   border-bottom: 1px solid var(--c-border);
   transition: padding var(--t);
@@ -123,7 +123,7 @@ body::before {
 /* Mobile menu */
 .mobile-menu {
   display: none; position: fixed; inset: 0; z-index: 99;
-  background: rgba(10, 10, 11, 0.97); backdrop-filter: blur(20px);
+  background: rgba(45, 78, 70, 0.98); backdrop-filter: blur(20px);
   flex-direction: column; align-items: center; justify-content: center;
   gap: 2.5rem;
 }
@@ -152,9 +152,9 @@ body::before {
 .hero-bg {
   position: absolute; inset: 0; z-index: 0;
   background:
-    radial-gradient(ellipse 80% 60% at 50% 30%, rgba(138, 171, 138, 0.07) 0%, transparent 70%),
-    radial-gradient(ellipse 60% 80% at 80% 80%, rgba(212, 184, 150, 0.04) 0%, transparent 60%),
-    linear-gradient(180deg, #0b0e0c 0%, #0e130e 100%);
+    radial-gradient(ellipse 80% 60% at 50% 30%, rgba(200, 185, 138, 0.10) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 80% at 80% 80%, rgba(30, 80, 65, 0.30) 0%, transparent 60%),
+    linear-gradient(160deg, #3d6b60 0%, #2f5249 100%);
 }
 .hero-line {
   position: absolute; top: 0; left: 50%; transform: translateX(-50%);
