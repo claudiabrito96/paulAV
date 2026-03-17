@@ -1,5 +1,6 @@
 "use client";
 
+import emailjs from "@emailjs/browser";
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 
@@ -227,12 +228,35 @@ function Portfolio() {
 
 function Contact() {
   const [submitted, setSubmitted] = useState(false);
+  const [loading,   setLoading]   = useState(false);
+  const [error,     setError]     = useState(null);
   const [form, setForm] = useState({ name: "", email: "", service: "", message: "" });
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+    setError(null);
+
+    try {
+      await emailjs.send(
+        "service_kybey8j",    // ← replace with your EmailJS Service ID
+        "template_usiomqs",   // ← replace with your EmailJS Template ID
+        {
+          name:    form.name,
+          email:   form.email,
+          service: form.service,
+          message: form.message,
+        },
+        "MbWVGNpkdzaZpe35g"     // ← replace with your EmailJS Public Key
+      );
+      setSubmitted(true);
+    } catch (err) {
+      setError("Something went wrong. Please try again or call us directly.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -284,7 +308,14 @@ function Contact() {
                   <label htmlFor="message">Tell Us About Your Project</label>
                   <textarea id="message" name="message" rows={5} placeholder="Describe your event, timeline, and any specific requirements…" value={form.message} onChange={handleChange} required />
                 </div>
-                <button type="submit" className="submit-btn">Send Message</button>
+                <button type="submit" className="submit-btn" disabled={loading}>
+                  {loading ? "Sending…" : "Send Message"}
+                </button>
+                {error && (
+                  <p style={{ color: "#e07070", fontSize: "0.85rem", marginTop: "0.5rem" }}>
+                    {error}
+                  </p>
+                )}
               </form>
             ) : (
               <div className="form-success">
