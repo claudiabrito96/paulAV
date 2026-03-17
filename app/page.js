@@ -241,7 +241,7 @@ function Contact() {
 
     try {
       await emailjs.send(
-        "service_kybey8j",    // ← replace with your EmailJS Service ID
+        "service_jzo28mi",    // ← replace with your EmailJS Service ID
         "template_usiomqs",   // ← replace with your EmailJS Template ID
         {
           name:    form.name,
