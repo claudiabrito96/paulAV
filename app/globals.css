@@ -74,12 +74,13 @@ body::before {
 .navbar.scrolled { padding: 0.75rem 4vw; }
 
 .nav-logo {
-  display: flex; align-items: center; gap: 0.75rem;
-  font-family: var(--font-display); font-size: 1.2rem; font-weight: 600;
-  color: var(--c-white);
+  display: flex; align-items: center;
 }
-.nav-logo-img { border-radius: 3px; height: 40px; width: auto; }
-.nav-logo-text em { font-style: italic; color: var(--c-gold); }
+.nav-logo-img {
+  height: 44px;
+  width: auto;
+  object-fit: contain;
+}
 
 .nav-links {
   display: flex; align-items: center; gap: 2.5rem;

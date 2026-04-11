@@ -77,8 +77,7 @@ function Navbar() {
     <>
       <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
         <a href="#home" className="nav-logo">
-          <Image src="/logo.png" alt="Paul Stuart AV" width={40} height={40} className="nav-logo-img" onError={(e) => { e.target.style.display = "none"; }} />
-          <span className="nav-logo-text">Paul Stuart <em>AV</em></span>
+          <Image src="/logo.png" alt="Paul Stuart AV" width={120} height={50} className="nav-logo-img" priority />
         </a>
         <ul className="nav-links">
           {["services", "locations", "portfolio", "contact"].map((s) => (
@@ -307,13 +306,10 @@ function Contact() {
           <Reveal className="contact-info">
             <p className="section-label">Get In Touch</p>
             <h2 className="contact-title">Ready to Elevate<br />Your <em>AV Experience?</em></h2>
-            <p className="contact-desc">
-              Whether you're planning a corporate event, upgrading your conference rooms, or dreaming of the perfect home theater — we'd love to hear from you.
-            </p>
             <div className="contact-details">
               {[
                 { icon: "📞", text: "+1 224 595 3327", href: "tel:+12245953327" },
-                { icon: "✉️", text: "paulstuartAV@gmail.com", href: "mailto:paulstuartAV@gmail.com" },
+                { icon: "✉️", text: "paul@paulstuartav.com", href: "mailto:paul@paulstuartav.com" },
                 { icon: "📍", text: "Tampa, FL & Chicago, IL", href: null },
               ].map((d) => (
                 <div className="contact-detail" key={d.text}>
