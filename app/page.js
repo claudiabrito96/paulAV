@@ -41,12 +41,9 @@ function Reveal({ children, delay = 0, className = "" }) {
 
 // ─── Data ─────────────────────────────────────────────────────
 const SERVICES = [
-  { icon: "🎤", title: "Corporate & Conference AV", desc: "Video walls, hybrid meeting rooms, control systems, and seamless integration for any corporate environment." },
-  { icon: "🎥", title: "Live Event Production", desc: "Concerts, galas, trade shows — full lighting, sound and video production managed end-to-end." },
-  { icon: "🏠", title: "Home Theater & Smart Homes", desc: "Premium residential installations, multi-room audio systems, and cinema-grade home theaters." },
-  { icon: "🖥️", title: "Video Conferencing", desc: "Zoom/Teams rooms, PTZ cameras, microphones, and full collaboration tool integration." },
-  { icon: "📺", title: "Digital Signage", desc: "Content management systems, LED walls, and dynamic messaging solutions for any environment." },
-  { icon: "🔧", title: "Service & Maintenance", desc: "24/7 support, preventive maintenance programs, emergency repairs, and system upgrades." },
+  { icon: "🎤", title: "Conferences & Meetings", desc: "Microphones, screens, video switching, presentation support." },
+  { icon: "🖥️", title: "Virtual & Hybrid", desc: "Zoom/Teams calls, cameras, conference microphones, collaboration tools." },
+  { icon: "🎥", title: "Receptions & Galas", desc: "Sound, staging, lighting, DJ Services... Event design assistance." },
 ];
 
 const PORTFOLIO = [
@@ -241,15 +238,15 @@ function Contact() {
 
     try {
       await emailjs.send(
-        "service_jzo28mi",    // ← replace with your EmailJS Service ID
-        "template_usiomqs",   // ← replace with your EmailJS Template ID
+        "YOUR_SERVICE_ID",    // ← replace with your EmailJS Service ID
+        "YOUR_TEMPLATE_ID",   // ← replace with your EmailJS Template ID
         {
           name:    form.name,
           email:   form.email,
           service: form.service,
           message: form.message,
         },
-        "MbWVGNpkdzaZpe35g"     // ← replace with your EmailJS Public Key
+        "YOUR_PUBLIC_KEY"     // ← replace with your EmailJS Public Key
       );
       setSubmitted(true);
     } catch (err) {
