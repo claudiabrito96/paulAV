@@ -178,21 +178,55 @@ function Locations() {
           <h2 className="section-title">Two Markets,<br />One Standard of Excellence</h2>
         </Reveal>
         <div className="locations-grid">
-          {[
-            { city: "Tampa", sub: "Main Office & Warehouse", detail: "Tampa Bay Area, FL\nServing all of the Gulf Coast" },
-            { city: "Chicago", sub: "Midwest Office", detail: "Greater Chicago Area, IL\nServing the entire Midwest" },
-          ].map((loc, i) => (
-            <Reveal key={loc.city} delay={i * 0.15} className="location-card">
-              <p className="location-pin">📍 {loc.city}</p>
-              <h3>{loc.city}</h3>
-              <p className="loc-sub">{loc.sub}</p>
-              <address>
-                {loc.detail.split("\n").map((line, j) => <span key={j}>{line}<br /></span>)}
-                <br />
-                <a href="tel:+12245953327">+1 224 595 3327</a>
-              </address>
-            </Reveal>
-          ))}
+
+          {/* Tampa */}
+          <Reveal delay={0} className="location-card">
+            <p className="location-pin">📍 Tampa</p>
+            <h3>Tampa</h3>
+            <p className="loc-sub">Main Office</p>
+            <address>
+              3408 Picwood Rd<br />
+              Tampa, FL 33618<br /><br />
+              <a href="tel:+12245953327">+1 224 595 3327</a>
+            </address>
+            <div className="location-map">
+              <iframe
+                title="Tampa Office"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3523.1!2d-82.4985556!3d28.0491877!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88c0c0e83f44e61b%3A0xb201b71785aad9!2s3408%20Picwood%20Rd%2C%20Tampa%2C%20FL%2033618!5e0!3m2!1sen!2sus!4v1699999999999"
+                width="100%"
+                height="200"
+                style={{ border: 0, borderRadius: "8px", marginTop: "1.5rem", filter: "hue-rotate(100deg) saturate(0.6) brightness(0.85)" }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+          </Reveal>
+
+          {/* Chicago */}
+          <Reveal delay={0.15} className="location-card">
+            <p className="location-pin">📍 Chicago</p>
+            <h3>Chicago</h3>
+            <p className="loc-sub">Midwest Office</p>
+            <address>
+              2511 Wilke Rd<br />
+              Rolling Meadows, IL 60008<br /><br />
+              <a href="tel:+12245953327">+1 224 595 3327</a>
+            </address>
+            <div className="location-map">
+              <iframe
+                title="Chicago Office"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2966.1!2d-88.0051725!3d42.0828038!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fbbac99e94a05%3A0x8d6de2a37de5e072!2s2511%20N%20Wilke%20Rd%2C%20Rolling%20Meadows%2C%20IL%2060008!5e0!3m2!1sen!2sus!4v1699999999999"
+                width="100%"
+                height="200"
+                style={{ border: 0, borderRadius: "8px", marginTop: "1.5rem", filter: "hue-rotate(100deg) saturate(0.6) brightness(0.85)" }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+          </Reveal>
+
         </div>
       </div>
     </section>

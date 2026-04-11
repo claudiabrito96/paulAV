@@ -291,17 +291,19 @@ body::before {
 .services-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  background: var(--c-border);
-  border: 1px solid var(--c-border);
+  gap: 1.5rem;
+  background: transparent;
+  border: none;
 }
 .service-card {
-  background: var(--c-surface);
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
   padding: 2.5rem;
   transition: background var(--t);
   cursor: default;
 }
-.service-card:hover { background: var(--c-card); }
+.service-card:hover { background: rgba(255, 255, 255, 0.11); }
 .service-icon {
   width: 48px; height: 48px; margin-bottom: 1.5rem;
   display: flex; align-items: center; justify-content: center;
@@ -361,6 +363,8 @@ body::before {
 }
 .location-card address a { color: var(--c-gold); transition: opacity var(--t); }
 .location-card address a:hover { opacity: 0.8; }
+.location-map { margin-top: 1.5rem; border-radius: 8px; overflow: hidden; }
+.location-map iframe { display: block; width: 100%; }
 
 /* ─── PORTFOLIO ──────────────────────────────────────────────── */
 .portfolio-header { text-align: center; margin-bottom: 3.5rem; }
@@ -519,7 +523,7 @@ footer {
   .nav-cta   { display: none; }
   .hamburger { display: flex; }
 
-  .services-grid { grid-template-columns: 1fr 1fr; }
+  .services-grid { grid-template-columns: 1fr; gap: 1rem; }
   .services-header { flex-direction: column; align-items: flex-start; }
 
   .locations-grid { grid-template-columns: 1fr; }
@@ -546,7 +550,7 @@ footer {
   .hero { padding: 7rem 6vw 4rem; }
   .hero-badges { gap: 2rem; }
 
-  .services-grid { grid-template-columns: 1fr; }
+  .services-grid { grid-template-columns: 1fr; gap: 1rem; }
 
   .portfolio-grid {
     grid-template-columns: 1fr;
