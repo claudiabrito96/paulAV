@@ -47,7 +47,7 @@ const SERVICES = [
 ];
 
 const PORTFOLIO = [
-  { src: "https://www.cti.com/wp-content/uploads/2025/02/Meeting-Room-Video-Wall-CTI-logo.png", label: "Corporate AV", span: "large" },
+  { src: "https://www.cti.com/wp-content/uploads/2025/02/Meeting-Room-Video-Wall-CTI-logo.jpg", label: "Corporate AV", span: "large" },
   { src: "https://amhelectronics.com/wp-content/uploads/2025/04/Services-Commercial-Home-Page-new.jpg", label: "Conference Room", span: "small" },
   { src: "https://www.ldsystems.com/wp-content/uploads/2013/10/PROJECTS-NYE-Live-Houston-01.jpg", label: "Live Production", span: "small" },
   { src: "https://ava-public.s3.eu-central-1.amazonaws.com/wp-content/uploads/2022/01/06153646/konsertystemer-nordic-beats-2017-2.jpg", label: "Event Lighting", span: "small" },
@@ -77,7 +77,7 @@ function Navbar() {
     <>
       <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
         <a href="#home" className="nav-logo">
-          <Image src="/logo.png" alt="Paul Stuart AV" width={120} height={50} className="nav-logo-img" priority />
+          <Image src="/logo.jpg" alt="Paul Stuart AV" width={120} height={50} className="nav-logo-img" priority />
         </a>
         <ul className="nav-links">
           {["services", "locations", "portfolio", "contact"].map((s) => (
@@ -108,7 +108,7 @@ function Hero() {
       <div className="hero-line" />
       <div className="hero-logo-wrap">
         <Image
-          src="/logo.png"
+          src="/logo.jpg"
           alt="Paul Stuart AV"
           width={220}
           height={140}
