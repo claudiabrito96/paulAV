@@ -107,6 +107,16 @@ function Hero() {
     <header className="hero" id="home">
       <div className="hero-bg" />
       <div className="hero-line" />
+      <div className="hero-logo-wrap">
+        <Image
+          src="/logo.png"
+          alt="Paul Stuart AV"
+          width={220}
+          height={140}
+          className="hero-logo"
+          priority
+        />
+      </div>
       <p className="hero-eyebrow">
         <span className="eyebrow-line" />
         Boutique AV Concierge · Since 2010
