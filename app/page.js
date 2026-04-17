@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import Image from "next/image";
 
 // ─── Scroll Reveal Hook ───────────────────────────────────────
 function useReveal() {
@@ -38,6 +37,16 @@ function Reveal({ children, delay = 0, className = "" }) {
   );
 }
 
+// ─── Logo Component (Nunito + Arimo) ─────────────────────────
+function Logo({ size = "sm" }) {
+  return (
+    <span className={`logo-lockup logo-lockup-${size}`}>
+      <span className="logo-name">Paul Stuart</span>
+      <span className="logo-av">AV</span>
+    </span>
+  );
+}
+
 // ─── Data ─────────────────────────────────────────────────────
 const SERVICES = [
   { icon: "🎤", title: "Conferences & Meetings", desc: "Microphones, screens, video switching, presentation support." },
@@ -46,14 +55,13 @@ const SERVICES = [
 ];
 
 const PORTFOLIO = [
-  { src: "https://www.cti.com/wp-content/uploads/2025/02/Meeting-Room-Video-Wall-CTI-logo.png", label: "Corporate AV" },
-  { src: "https://www.ldsystems.com/wp-content/uploads/2013/10/PROJECTS-NYE-Live-Houston-01.jpg", label: "Live Production" },
-  { src: "https://beaconaudiovideosystems.com/images/easyblog_articles/243/b2ap3_amp_BEAUVI_MayBlog1_Home-Theater-Setup-Cincinnati-OH_PHOTO.jpg", label: "Home Theater" },
-  { src: "https://www.aurumhometech.com/images/easyblog_articles/139/b2ap3_large_immerse-yourself-in-another-world-with-a-custom-home-theater-design.jpg", label: "Premium Cinema" },
+  { src: "/project1.jpg", label: "Project One" },
+  { src: "/project2.jpg", label: "Project Two" },
+  { src: "/project3.jpg", label: "Project Three" },
+  { src: "/project4.jpg", label: "Project Four" },
 ];
 
-// ─── Components ───────────────────────────────────────────────
-
+// ─── Navbar ───────────────────────────────────────────────────
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -74,7 +82,7 @@ function Navbar() {
     <>
       <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
         <a href="#home" className="nav-logo">
-          <Image src="/logo.png" alt="Paul Stuart AV" width={120} height={50} className="nav-logo-img" priority />
+          <Logo size="sm" />
         </a>
         <ul className="nav-links">
           {["services", "locations", "portfolio", "contact"].map((s) => (
@@ -87,7 +95,6 @@ function Navbar() {
         </button>
       </nav>
 
-      {/* Mobile Menu */}
       <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
         {["services", "locations", "portfolio", "contact"].map((s) => (
           <a key={s} href={`#${s}`} onClick={closeMenu}>{s.charAt(0).toUpperCase() + s.slice(1)}</a>
@@ -98,16 +105,14 @@ function Navbar() {
   );
 }
 
+// ─── Hero ─────────────────────────────────────────────────────
 function Hero() {
   return (
     <header className="hero" id="home">
       <div className="hero-bg" />
       <div className="hero-line" />
       <div className="hero-logo-wrap">
-        <div className="hero-text-logo">
-          <span className="hero-text-logo-name">Paul Stuart</span>
-          <span className="hero-text-logo-av">AV</span>
-        </div>
+        <Logo size="lg" />
       </div>
       <p className="hero-eyebrow">
         <span className="eyebrow-line" />
@@ -141,6 +146,7 @@ function Hero() {
   );
 }
 
+// ─── Services ─────────────────────────────────────────────────
 function Services() {
   return (
     <section id="services" className="section section-surface">
@@ -171,6 +177,7 @@ function Services() {
   );
 }
 
+// ─── Locations ────────────────────────────────────────────────
 function Locations() {
   return (
     <section id="locations" className="section">
@@ -181,7 +188,6 @@ function Locations() {
         </Reveal>
         <div className="locations-grid">
 
-          {/* Tampa */}
           <Reveal delay={0} className="location-card">
             <p className="location-pin">📍 Tampa</p>
             <h3>Tampa</h3>
@@ -195,17 +201,13 @@ function Locations() {
               <iframe
                 title="Tampa Office"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3523.1!2d-82.4985556!3d28.0491877!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88c0c0e83f44e61b%3A0xb201b71785aad9!2s3408%20Picwood%20Rd%2C%20Tampa%2C%20FL%2033618!5e0!3m2!1sen!2sus!4v1699999999999"
-                width="100%"
-                height="200"
+                width="100%" height="200"
                 style={{ border: 0, borderRadius: "8px", marginTop: "1.5rem", filter: "hue-rotate(100deg) saturate(0.6) brightness(0.85)" }}
-                allowFullScreen=""
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"
               />
             </div>
           </Reveal>
 
-          {/* Chicago */}
           <Reveal delay={0.15} className="location-card">
             <p className="location-pin">📍 Chicago</p>
             <h3>Chicago</h3>
@@ -219,12 +221,9 @@ function Locations() {
               <iframe
                 title="Chicago Office"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2966.1!2d-88.0051725!3d42.0828038!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fbbac99e94a05%3A0x8d6de2a37de5e072!2s2511%20N%20Wilke%20Rd%2C%20Rolling%20Meadows%2C%20IL%2060008!5e0!3m2!1sen!2sus!4v1699999999999"
-                width="100%"
-                height="200"
+                width="100%" height="200"
                 style={{ border: 0, borderRadius: "8px", marginTop: "1.5rem", filter: "hue-rotate(100deg) saturate(0.6) brightness(0.85)" }}
-                allowFullScreen=""
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"
               />
             </div>
           </Reveal>
@@ -235,6 +234,7 @@ function Locations() {
   );
 }
 
+// ─── Portfolio ────────────────────────────────────────────────
 function Portfolio() {
   return (
     <section id="portfolio" className="section section-bg">
@@ -259,15 +259,32 @@ function Portfolio() {
   );
 }
 
+// ─── Contact ──────────────────────────────────────────────────
 function Contact() {
   const [submitted, setSubmitted] = useState(false);
+  const [loading,   setLoading]   = useState(false);
+  const [error,     setError]     = useState(null);
   const [form, setForm] = useState({ name: "", email: "", service: "", message: "" });
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await fetch("/api/contact", {
+        method:  "POST",
+        headers: { "Content-Type": "application/json" },
+        body:    JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error();
+      setSubmitted(true);
+    } catch {
+      setError("Something went wrong. Please try again or call us directly.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -279,8 +296,8 @@ function Contact() {
             <h2 className="contact-title">Ready to Elevate<br />Your <em>AV Experience?</em></h2>
             <div className="contact-details">
               {[
-                { icon: "📞", text: "+1 224 595 3327", href: "tel:+12245953327" },
-                { icon: "✉️", text: "paul@paulstuartav.com", href: "mailto:paul@paulstuartav.com" },
+                { icon: "📞", text: "+1 224 595 3327",        href: "tel:+12245953327" },
+                { icon: "✉️", text: "paul@paulstuartav.com",  href: "mailto:paul@paulstuartav.com" },
                 { icon: "📍", text: "Tampa, FL & Chicago, IL", href: null },
               ].map((d) => (
                 <div className="contact-detail" key={d.text}>
@@ -316,7 +333,14 @@ function Contact() {
                   <label htmlFor="message">Tell Us About Your Project</label>
                   <textarea id="message" name="message" rows={5} placeholder="Describe your event, timeline, and any specific requirements…" value={form.message} onChange={handleChange} required />
                 </div>
-                <button type="submit" className="submit-btn">Send Message</button>
+                <button type="submit" className="submit-btn" disabled={loading}>
+                  {loading ? "Sending…" : "Send Message"}
+                </button>
+                {error && (
+                  <p style={{ color: "#e07070", fontSize: "0.85rem", marginTop: "0.5rem" }}>
+                    {error}
+                  </p>
+                )}
               </form>
             ) : (
               <div className="form-success">
@@ -330,12 +354,13 @@ function Contact() {
   );
 }
 
+// ─── Footer ───────────────────────────────────────────────────
 function Footer() {
   return (
     <footer>
       <div className="footer-inner">
         <div className="footer-top">
-          <div className="footer-logo">Paul Stuart <span>AV</span></div>
+          <div className="footer-logo"><Logo size="sm" /></div>
           <nav className="footer-nav">
             {["services", "locations", "portfolio", "contact"].map((s) => (
               <a key={s} href={`#${s}`}>{s.charAt(0).toUpperCase() + s.slice(1)}</a>
@@ -346,7 +371,7 @@ function Footer() {
           <p className="footer-copy">© 2026 Paul Stuart AV. All rights reserved. Tampa • Chicago</p>
           <div className="footer-contact">
             <a href="tel:+12245953327">+1 224 595 3327</a>
-            <a href="mailto:paulstuartAV@gmail.com">paulstuartAV@gmail.com</a>
+            <a href="mailto:paul@paulstuartav.com">paul@paulstuartav.com</a>
           </div>
         </div>
       </div>

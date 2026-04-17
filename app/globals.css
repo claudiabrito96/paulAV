@@ -78,11 +78,33 @@ body::before {
 .nav-logo {
   display: flex; align-items: center;
 }
-.nav-logo-img {
-  height: 44px;
-  width: auto;
-  object-fit: contain;
+
+/* ─── Logo Lockup (Nunito + Arimo) ──────────────────────────── */
+.logo-lockup {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.3em;
+  line-height: 1;
 }
+.logo-name {
+  font-family: var(--font-nunito), 'Nunito', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--c-white);
+}
+.logo-av {
+  font-family: var(--font-arimo), 'Arimo', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--c-gold);
+}
+/* Small — navbar & footer */
+.logo-lockup-sm .logo-name { font-size: 1rem; }
+.logo-lockup-sm .logo-av   { font-size: 1rem; }
+/* Large — hero banner */
+.logo-lockup-lg .logo-name { font-size: clamp(1.8rem, 5vw, 3.2rem); }
+.logo-lockup-lg .logo-av   { font-size: clamp(1.8rem, 5vw, 3.2rem); }
 
 .nav-links {
   display: flex; align-items: center; gap: 2.5rem;
@@ -170,33 +192,18 @@ body::before {
   margin-bottom: 2rem;
   animation: fadeUp 0.9s 0.1s both;
 }
-.hero-logo {
-  width: 180px; height: auto; object-fit: contain;
-  filter: drop-shadow(0 4px 24px rgba(0,0,0,0.3));
-}
 .hero-text-logo {
-  display: flex;
-  align-items: baseline;
-  gap: 0.4rem;
-  justify-content: center;
+  display: flex; align-items: baseline; gap: 0.4rem; justify-content: center;
 }
 .hero-text-logo-name {
   font-family: var(--font-nunito), sans-serif;
-  font-weight: 300;
-  font-size: clamp(2.2rem, 6vw, 4rem);
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--c-white);
+  font-weight: 300; font-size: clamp(2.2rem, 6vw, 4rem);
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--c-white);
 }
 .hero-text-logo-av {
   font-family: var(--font-arimo), sans-serif;
-  font-weight: 700;
-  font-size: clamp(2.2rem, 6vw, 4rem);
-  letter-spacing: 0.05em;
-  color: var(--c-gold);
-}
-@media (max-width: 600px) {
-  .hero-logo { width: 130px; }
+  font-weight: 700; font-size: clamp(2.2rem, 6vw, 4rem);
+  letter-spacing: 0.05em; color: var(--c-gold);
 }
 .hero-eyebrow {
   position: relative; z-index: 1;
