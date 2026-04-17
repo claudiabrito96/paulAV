@@ -306,7 +306,7 @@ function Contact() {
             <div className="contact-details">
               {[
                 { icon: "📞", text: "+1 224 595 3327", href: "tel:+12245953327" },
-                { icon: "✉️", text: "paulstuartAV@gmail.com", href: "mailto:paulstuartAV@gmail.com" },
+                { icon: "✉️", text: "paul@paulstuartav.com", href: "mailto:paul@paulstuartav.com" },
                 { icon: "📍", text: "Tampa, FL & Chicago, IL", href: null },
               ].map((d) => (
                 <div className="contact-detail" key={d.text}>
