@@ -56,7 +56,7 @@ const SERVICES = [
 
 const PORTFOLIO = [
   { src: "/project1.jpg", label: "Outdoor Gala" },
-  { src: "/project2.jpg", label: "Ballroom Frundraiser with LED Wall" },
+  { src: "/project2.jpg", label: "Ballroom Fundraiser with LED Wall" },
   { src: "/project3.jpg", label: "Hybrid Board Meeting" },
   { src: "/project4.jpg", label: "Outdoor Projector with Screen" },
 ];
@@ -273,20 +273,37 @@ function Contact() {
     setLoading(true);
     setError(null);
 
+    // ── Replace these 3 values with yours from EmailJS dashboard ──
+    const SERVICE_ID  = "YOUR_SERVICE_ID";
+    const TEMPLATE_ID = "YOUR_TEMPLATE_ID";
+    const PUBLIC_KEY  = "YOUR_PUBLIC_KEY";
+    // ──────────────────────────────────────────────────────────────
+
     try {
-      await emailjs.send(
-        "service_ms4yrgr",    // ← replace with your EmailJS Service ID
-        "template_f0j816f",   // ← replace with your EmailJS Template ID
-        {
-          name:    form.name,
-          email:   form.email,
-          service: form.service,
-          message: form.message,
-        },
-        "yQ2cnckc4qCxvxHqa"     // ← replace with your EmailJS Public Key
-      );
-      setSubmitted(true);
+      const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+        method:  "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          service_id:  SERVICE_ID,
+          template_id: TEMPLATE_ID,
+          user_id:     PUBLIC_KEY,
+          template_params: {
+            name:    form.name,
+            email:   form.email,
+            service: form.service,
+            message: form.message,
+          },
+        }),
+      });
+      if (res.status === 200) {
+        setSubmitted(true);
+      } else {
+        const text = await res.text();
+        console.error("EmailJS error:", res.status, text);
+        throw new Error(text);
+      }
     } catch (err) {
+      console.error("Submit error:", err);
       setError("Something went wrong. Please try again or call us directly.");
     } finally {
       setLoading(false);
@@ -300,13 +317,10 @@ function Contact() {
           <Reveal className="contact-info">
             <p className="section-label">Get In Touch</p>
             <h2 className="contact-title">Ready to Elevate<br />Your <em>AV Experience?</em></h2>
-            <p className="contact-desc">
-              Whether you're planning a corporate event, upgrading your conference rooms, or dreaming of the perfect home theater — we'd love to hear from you.
-            </p>
             <div className="contact-details">
               {[
-                { icon: "📞", text: "+1 224 595 3327", href: "tel:+12245953327" },
-                { icon: "✉️", text: "paul@paulstuartav.com", href: "mailto:paul@paulstuartav.com" },
+                { icon: "📞", text: "+1 224 595 3327",        href: "tel:+12245953327" },
+                { icon: "✉️", text: "paul@paulstuartav.com",  href: "mailto:paul@paulstuartav.com" },
                 { icon: "📍", text: "Tampa, FL & Chicago, IL", href: null },
               ].map((d) => (
                 <div className="contact-detail" key={d.text}>
