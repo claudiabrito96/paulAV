@@ -1,6 +1,5 @@
 "use client";
 
-import emailjs from "@emailjs/browser";
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 
@@ -47,10 +46,10 @@ const SERVICES = [
 ];
 
 const PORTFOLIO = [
-  { src: "/project1.jpg", label: "Outdoor Gala / Reception",    span: "large" },
-  { src: "/project2.jpg", label: "Outdor Screen and Projector",  span: "small" },
-  { src: "/project3.jpg", label: "Hybrid Board Meeting",  span: "large" },
-  { src: "/project4.jpg", label: "Ballroom Conference with LED Wall",   span: "large" },
+  { src: "https://www.cti.com/wp-content/uploads/2025/02/Meeting-Room-Video-Wall-CTI-logo.png", label: "Corporate AV" },
+  { src: "https://www.ldsystems.com/wp-content/uploads/2013/10/PROJECTS-NYE-Live-Houston-01.jpg", label: "Live Production" },
+  { src: "https://beaconaudiovideosystems.com/images/easyblog_articles/243/b2ap3_amp_BEAUVI_MayBlog1_Home-Theater-Setup-Cincinnati-OH_PHOTO.jpg", label: "Home Theater" },
+  { src: "https://www.aurumhometech.com/images/easyblog_articles/139/b2ap3_large_immerse-yourself-in-another-world-with-a-custom-home-theater-design.jpg", label: "Premium Cinema" },
 ];
 
 // ─── Components ───────────────────────────────────────────────
@@ -105,14 +104,10 @@ function Hero() {
       <div className="hero-bg" />
       <div className="hero-line" />
       <div className="hero-logo-wrap">
-        <Image
-          src="/logo.png"
-          alt="Paul Stuart AV"
-          width={220}
-          height={140}
-          className="hero-logo"
-          priority
-        />
+        <div className="hero-text-logo">
+          <span className="hero-text-logo-name">Paul Stuart</span>
+          <span className="hero-text-logo-av">AV</span>
+        </div>
       </div>
       <p className="hero-eyebrow">
         <span className="eyebrow-line" />
@@ -266,35 +261,13 @@ function Portfolio() {
 
 function Contact() {
   const [submitted, setSubmitted] = useState(false);
-  const [loading,   setLoading]   = useState(false);
-  const [error,     setError]     = useState(null);
   const [form, setForm] = useState({ name: "", email: "", service: "", message: "" });
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
-    setError(null);
-
-    try {
-      await emailjs.send(
-        "YOUR_SERVICE_ID",    // ← replace with your EmailJS Service ID
-        "YOUR_TEMPLATE_ID",   // ← replace with your EmailJS Template ID
-        {
-          name:    form.name,
-          email:   form.email,
-          service: form.service,
-          message: form.message,
-        },
-        "YOUR_PUBLIC_KEY"     // ← replace with your EmailJS Public Key
-      );
-      setSubmitted(true);
-    } catch (err) {
-      setError("Something went wrong. Please try again or call us directly.");
-    } finally {
-      setLoading(false);
-    }
+    setSubmitted(true);
   };
 
   return (
@@ -343,14 +316,7 @@ function Contact() {
                   <label htmlFor="message">Tell Us About Your Project</label>
                   <textarea id="message" name="message" rows={5} placeholder="Describe your event, timeline, and any specific requirements…" value={form.message} onChange={handleChange} required />
                 </div>
-                <button type="submit" className="submit-btn" disabled={loading}>
-                  {loading ? "Sending…" : "Send Message"}
-                </button>
-                {error && (
-                  <p style={{ color: "#e07070", fontSize: "0.85rem", marginTop: "0.5rem" }}>
-                    {error}
-                  </p>
-                )}
+                <button type="submit" className="submit-btn">Send Message</button>
               </form>
             ) : (
               <div className="form-success">

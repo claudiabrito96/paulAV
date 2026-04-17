@@ -1,4 +1,4 @@
-import { Playfair_Display, Inter } from "next/font/google";
+import { Playfair_Display, Inter, Nunito, Arimo } from "next/font/google";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -13,6 +13,20 @@ const inter = Inter({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600"],
   variable: "--font-body",
+  display: "swap",
+});
+
+const nunito = Nunito({
+  subsets: ["latin"],
+  weight: ["300", "400", "600"],
+  variable: "--font-nunito",
+  display: "swap",
+});
+
+const arimo = Arimo({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-arimo",
   display: "swap",
 });
 
@@ -32,7 +46,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
+    <html lang="en" className={`${playfair.variable} ${inter.variable} ${nunito.variable} ${arimo.variable}`}>
       <body>{children}</body>
     </html>
   );
