@@ -274,9 +274,9 @@ function Contact() {
     setError(null);
 
     // ── Replace these 3 values with yours from EmailJS dashboard ──
-    const SERVICE_ID  = "YOUR_SERVICE_ID";
-    const TEMPLATE_ID = "YOUR_TEMPLATE_ID";
-    const PUBLIC_KEY  = "YOUR_PUBLIC_KEY";
+    const SERVICE_ID  = "service_ms4yrgr";
+    const TEMPLATE_ID = "template_f0j816f";
+    const PUBLIC_KEY  = "yQ2cnckc4qCxvxHqa";
     // ──────────────────────────────────────────────────────────────
 
     try {
