@@ -49,7 +49,7 @@ const SERVICES = [
 const PORTFOLIO = [
   { src: "/project1.jpg", label: "Outdoor Gala / Reception",    span: "large" },
   { src: "/project2.jpg", label: "Outdor Screen and Projector",  span: "small" },
-  { src: "/project3.jpg", label: "Hybrid Board Meeting",  span: "small" },
+  { src: "/project3.jpg", label: "Hybrid Board Meeting",  span: "large" },
   { src: "/project4.jpg", label: "Ballroom Conference with LED Wall",   span: "large" },
 ];
 
