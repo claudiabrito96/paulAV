@@ -47,12 +47,10 @@ const SERVICES = [
 ];
 
 const PORTFOLIO = [
-  { src: "https://www.cti.com/wp-content/uploads/2025/02/Meeting-Room-Video-Wall-CTI-logo.png", label: "Corporate AV", span: "large" },
-  { src: "https://amhelectronics.com/wp-content/uploads/2025/04/Services-Commercial-Home-Page-new.jpg", label: "Conference Room", span: "small" },
-  { src: "https://www.ldsystems.com/wp-content/uploads/2013/10/PROJECTS-NYE-Live-Houston-01.jpg", label: "Live Production", span: "small" },
-  { src: "https://ava-public.s3.eu-central-1.amazonaws.com/wp-content/uploads/2022/01/06153646/konsertystemer-nordic-beats-2017-2.jpg", label: "Event Lighting", span: "small" },
-  { src: "https://beaconaudiovideosystems.com/images/easyblog_articles/243/b2ap3_amp_BEAUVI_MayBlog1_Home-Theater-Setup-Cincinnati-OH_PHOTO.jpg", label: "Home Theater", span: "small" },
-  { src: "https://www.aurumhometech.com/images/easyblog_articles/139/b2ap3_large_immerse-yourself-in-another-world-with-a-custom-home-theater-design.jpg", label: "Premium Cinema", span: "small" },
+  { src: "/project1.jpg", label: "Outdoor Gala / Reception",    span: "large" },
+  { src: "/project2.jpg", label: "Outdor Screen and Projector",  span: "small" },
+  { src: "/project3.jpg", label: "Hybrid Board Meeting",  span: "small" },
+  { src: "/project4.jpg", label: "Ballroom Conference with LED Wall",   span: "large" },
 ];
 
 // ─── Components ───────────────────────────────────────────────
