@@ -275,16 +275,15 @@ function Contact() {
 
     try {
       await emailjs.send(
-        "service_kybey8j",    // ← replace with your EmailJS Service ID
-        "service_jzo28mi",    // ← replace with your EmailJS Service ID
-        "template_usiomqs",   // ← replace with your EmailJS Template ID
+        "service_ms4yrgr",    // ← replace with your EmailJS Service ID
+        "template_f0j816f",   // ← replace with your EmailJS Template ID
         {
           name:    form.name,
           email:   form.email,
           service: form.service,
           message: form.message,
         },
-        "MbWVGNpkdzaZpe35g"     // ← replace with your EmailJS Public Key
+        "yQ2cnckc4qCxvxHqa"     // ← replace with your EmailJS Public Key
       );
       setSubmitted(true);
     } catch (err) {
