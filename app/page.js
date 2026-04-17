@@ -55,10 +55,10 @@ const SERVICES = [
 ];
 
 const PORTFOLIO = [
-  { src: "/project1.jpg", label: "Project One" },
-  { src: "/project2.jpg", label: "Project Two" },
-  { src: "/project3.jpg", label: "Project Three" },
-  { src: "/project4.jpg", label: "Project Four" },
+  { src: "/project1.jpg", label: "Outdoor Gala" },
+  { src: "/project2.jpg", label: "Ballroom Frundraiser with LED Wall" },
+  { src: "/project3.jpg", label: "Hybrid Board Meeting" },
+  { src: "/project4.jpg", label: "Outdoor Projector with Screen" },
 ];
 
 // ─── Navbar ───────────────────────────────────────────────────
