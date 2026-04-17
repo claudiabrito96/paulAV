@@ -272,15 +272,22 @@ function Contact() {
     e.preventDefault();
     setLoading(true);
     setError(null);
+
     try {
-      const res = await fetch("/api/contact", {
-        method:  "POST",
-        headers: { "Content-Type": "application/json" },
-        body:    JSON.stringify(form),
-      });
-      if (!res.ok) throw new Error();
+      await emailjs.send(
+        "service_kybey8j",    // ← replace with your EmailJS Service ID
+        "service_jzo28mi",    // ← replace with your EmailJS Service ID
+        "template_usiomqs",   // ← replace with your EmailJS Template ID
+        {
+          name:    form.name,
+          email:   form.email,
+          service: form.service,
+          message: form.message,
+        },
+        "MbWVGNpkdzaZpe35g"     // ← replace with your EmailJS Public Key
+      );
       setSubmitted(true);
-    } catch {
+    } catch (err) {
       setError("Something went wrong. Please try again or call us directly.");
     } finally {
       setLoading(false);
@@ -294,10 +301,13 @@ function Contact() {
           <Reveal className="contact-info">
             <p className="section-label">Get In Touch</p>
             <h2 className="contact-title">Ready to Elevate<br />Your <em>AV Experience?</em></h2>
+            <p className="contact-desc">
+              Whether you're planning a corporate event, upgrading your conference rooms, or dreaming of the perfect home theater — we'd love to hear from you.
+            </p>
             <div className="contact-details">
               {[
-                { icon: "📞", text: "+1 224 595 3327",        href: "tel:+12245953327" },
-                { icon: "✉️", text: "paul@paulstuartav.com",  href: "mailto:paul@paulstuartav.com" },
+                { icon: "📞", text: "+1 224 595 3327", href: "tel:+12245953327" },
+                { icon: "✉️", text: "paulstuartAV@gmail.com", href: "mailto:paulstuartAV@gmail.com" },
                 { icon: "📍", text: "Tampa, FL & Chicago, IL", href: null },
               ].map((d) => (
                 <div className="contact-detail" key={d.text}>
